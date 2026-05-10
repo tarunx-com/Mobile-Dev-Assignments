@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View, Image,TextInput,Pressable,KeyboardAvoidingView,SafeAreaView,Platform,ScrollView} from "react-native";
+import { StyleSheet, Text, View, Image,TextInput,Pressable,KeyboardAvoidingView,Platform} from "react-native";
 import { useState } from "react";
 import React from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const index = () => {
 
@@ -8,7 +9,8 @@ const index = () => {
 	const [pass, setPass] = useState("");
 
 	return (
-		<View style={{
+
+		<SafeAreaView style={{
 			flex: 1,
 			backgroundColor: "white",
 		}}>
@@ -17,7 +19,7 @@ const index = () => {
 				alignItems: "center",
 				flexDirection: "column",
 				paddingTop: 40,
-				paddingBottom: 40,
+				paddingBottom: 50,
 			}}>
 				<Image source={require("@/assets/images/Screenshot.png")} style={{
 					width: 100,
@@ -38,8 +40,8 @@ const index = () => {
 				</Text>		
 			</View>
 			<View style={{
-				marginLeft: 12,
-				marginRight: 12
+				marginLeft: 14,
+				marginRight: 14
 			}}>
 				<Text style={{
 						fontSize: 14,
@@ -50,12 +52,14 @@ const index = () => {
 				<View style={{
 					borderRadius: 22,
 					marginTop: 8,
-					boxShadow: "0 6px 20px rgba(0,0,0,0.08)",
+					backgroundColor: "#FFFFFF",
+					elevation: 4,
 					display: "flex",
 					flexDirection: "row",
 					alignItems: "center",
 				}}>
 					<Image source={require("@/assets/images/Mail.jpg")} style={{
+						marginLeft: 4,
 						width: 40,
 						height: 40,
 					}}/>
@@ -70,19 +74,21 @@ const index = () => {
 				<Text style={{
 						fontSize: 14,
 						fontWeight: "bold",
-						marginTop: 20
+						marginTop: 24
 					}}>
 						Password
 				</Text>
 				<View style={{
 					borderRadius: 22,
 					marginTop: 8,
-					boxShadow: "0 6px 20px rgba(0,0,0,0.08)",
+					backgroundColor: "#FFFFFF",
+					elevation: 4,
 					display: "flex",
 					flexDirection: "row",
 					alignItems: "center",
 				}}>
 					<Image source={require("@/assets/images/pass.png")} style={{
+						marginLeft: 4,
 						width: 40,
 						height: 40,
 					}}/>
@@ -101,7 +107,7 @@ const index = () => {
 					alignItems: "center",
 					padding: 16,
 					borderRadius: 22,
-					marginTop: 25,
+					marginTop: 30,
 				}}>
 					<Text style={{
 						color: "white",
@@ -194,8 +200,7 @@ const index = () => {
 					</Text>
 				</Pressable>
 			</View>
-		</View>
-
+		</SafeAreaView>
 	);
 };
 
