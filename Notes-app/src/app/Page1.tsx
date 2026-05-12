@@ -153,45 +153,37 @@ const index = () => {
 						styles.searchInput,{ color: inUseTheme.subtext}
 					]}/>
 				</View>
-
 		
-			<View style={styles.noteList}>
-				<View style={styles.container}>
-					<FlatList 
-						data={NOTES}
-						keyExtractor={(item)=> item.id}
-						numColumns={2}
-						columnWrapperStyle={{ gap: 10, paddingHorizontal: 12 }}
-						renderItem={({item})=> 
-							<Pressable onPress={()=>alert("Navigtion to edit page will be added here")} style={[
-								styles.noteCard,{borderColor: inUseTheme.border,backgroundColor: inUseTheme.card,}
-								]}>
-								<Text numberOfLines={2} style={[styles.noteText,{
-									color: inUseTheme.text,
-								}]}>{item.title}</Text>
-								<Text numberOfLines={4} style={[styles.noteSubText,{
-									color: inUseTheme.subtext
-								}]}>{item.body}</Text>
-								<View style={styles.noteTag}>
-									{item.tags.map((tag: string) => (
-										<Text key={tag} style={[styles.tag,{
-											color: inUseTheme.accent , backgroundColor: inUseTheme.accentBg
-											}]}>
-											{tag}
-										</Text>
-									))}
-								</View>
-								<Text style={[styles.date,{
-									color:inUseTheme.subtext,
-								}]}>
-									~ {item.date}
-								</Text>
-							</Pressable>
-						}
-						showsVerticalScrollIndicator={false}
-					/>
-				</View>
-			</View>
+			<FlatList 
+                data={NOTES}
+                keyExtractor={(item) => item.id}
+                numColumns={2}
+                contentContainerStyle={styles.flatListContent}
+                columnWrapperStyle={styles.columnWrapper}
+                renderItem={({ item }) => (
+                    <Pressable style={StyleSheet.flatten([styles.noteCard, { backgroundColor: inUseTheme.card, borderColor: inUseTheme.border }])}>
+                        <Text numberOfLines={2} style={[styles.noteText, { color: inUseTheme.text }]}>
+                            {item.title}
+                        </Text>
+                        <Text numberOfLines={4} style={[styles.noteSubText, { color: inUseTheme.subtext }]}>
+                            {item.body}
+                        </Text>  
+                        
+                        <View style={styles.noteTag}>
+                            {item.tags.map((tag) => (
+                                <Text key={tag} style={[styles.tag, { color: inUseTheme.accent, backgroundColor: inUseTheme.accentBg }]}>
+                                    {tag}
+                                </Text>
+                            ))}
+                        </View>
+                        
+                        <Text style={[styles.date, { color: inUseTheme.subtext }]}>
+                            ~ {item.date}
+                        </Text>
+                    </Pressable>
+                )}
+                showsVerticalScrollIndicator={false}
+            />
 			<Pressable
 				style={[styles.fab, { backgroundColor: inUseTheme.accent }]}
 					onPress={() => alert("New note navition will be added here")}
@@ -237,6 +229,7 @@ const styles = StyleSheet.create({
 		width:60,
 		height: 30, 
 		marginLeft: 6,
+		marginRight: 4,
 		borderWidth: 1, 
 		borderRadius: 15
 	},
@@ -251,11 +244,12 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 		padding: 12,
-		marginTop: 16,
+		marginTop: 10,
 		marginLeft: 18,
 		marginRight: 18,
 		borderRadius: 30,
 		borderWidth: 1,
+		marginBottom: 10
 	},
 	searchIcon:{
 		width: 20,
@@ -267,15 +261,23 @@ const styles = StyleSheet.create({
 		padding:0,
 		margin:0,
 	},
-	noteList:{flex: 1, flexDirection: "row", paddingHorizontal: 14, paddingTop: 12, gap: 16 },
 	noteCard:{
 		flex:1,
 		padding: 4,
 		justifyContent: "space-between",
-		marginVertical: 8,
+		marginVertical: 6.5,
 		borderWidth: 1,
 		borderRadius: 7,
 	},
+	flatListContent: {
+        paddingHorizontal: 14,
+        paddingTop: 4,
+        paddingBottom: 100,
+    },
+    columnWrapper: {
+        justifyContent: "space-between",
+        gap: 12,
+    },
 	noteText:{
 		fontSize: 20,
 		fontWeight: "bold",
