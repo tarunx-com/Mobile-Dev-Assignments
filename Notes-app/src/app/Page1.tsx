@@ -228,7 +228,8 @@ const Index = () => {
                     { gap: isTablet ? 16 : 12 }
                 ]}
                 renderItem={({ item }) => (
-                    <Pressable style={[
+                    <Pressable onPress={()=>alert("Page2 edit navigation will be added here")}
+					style={[
                         styles.noteCard,
                         {
                             backgroundColor: inUseTheme.card,
