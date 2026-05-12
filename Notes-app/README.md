@@ -1,56 +1,143 @@
-# Welcome to your Expo app 👋
+# 📝 Notes App — React Native (Expo)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A clean, responsive two-screen notes application built with React Native and Expo, featuring a dynamic dark/light theme, adaptive layouts for phones and tablets, and a polished UI system.
 
-## Get started
+---
 
-1. Install dependencies
+## 📹 Demo
 
-   ```bash
-   npm install
-   ```
+> 🔗 [Demo Video Link](https://drive.google.com/file/d/1qU3w5o1aVBaVWNm8T6ujfFMUmoKHRsRX/view?usp=sharing) 
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+## 🔗 Repository
 
-In the output, you'll find options to open the app in a
+> 🔗 [GitHub Repository Link](https://github.com/tarunx-com/Mobile-Dev-Assignments/tree/main/Notes-app) 
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 📱 Screens
 
-## Get a fresh project
+### Screen 1 — Notes List (`Page1`)
+- Grid of note cards displayed in a 2-column `FlatList`
+- Search bar to filter notes
+- FAB (+) button to navigate to the note editor
+- Header with hamburger menu and profile avatar
 
-When you're ready, run:
+### Screen 2 — Note Editor (`Page2`)
+- Full-screen image banner with tag chips
+- Title and body `TextInput` fields
+- `KeyboardAvoidingView` for smooth keyboard handling
+- Save button and edit FAB
 
-```bash
-npm run reset-project
+### Entry Point (`index`)
+- Page switcher using `useState` to toggle between Page 1 and Page 2
+
+---
+
+## 🧩 Components Used
+
+| Component | Usage |
+|---|---|
+| `SafeAreaView` | Root container respecting device safe areas |
+| `View` | Layout containers throughout both screens |
+| `Text` | Headings, body text, tags, dates |
+| `TextInput` | Search bar (Page 1), title and body inputs (Page 2) |
+| `FlatList` | Note cards grid (Page 1) |
+| `ScrollView` | Scrollable editor content (Page 2) |
+| `ImageBackground` | Hero banner on the editor screen |
+| `Image` | Icons — hamburger, search, profile, mode toggle, arrow, edit |
+| `Pressable` | All tappable elements (cards, FAB, buttons, tags) |
+| `KeyboardAvoidingView` | Prevents keyboard from obscuring inputs (Page 2) |
+| `StatusBar` (Expo) | Adapts status bar style to current theme |
+
+---
+
+## 🪝 Hooks Used
+
+| Hook | Usage |
+|---|---|
+| `useState` | Theme override (`manualDark`), page navigation (`currentPage`) |
+| `useColorScheme` | Reads system-level dark/light preference |
+| `useWindowDimensions` | Drives responsive layout — tablet vs phone, portrait vs landscape |
+| `useSafeAreaInsets` | Fine-grained inset control for the editor header and bottom padding |
+
+---
+
+## ✨ UI Enhancements & Additional Improvements
+
+- **Manual dark/light toggle** — overrides system theme via a toggle button, persists within the session using `useState`
+- **Responsive layout system** — `isTablet` (`width >= 768`) and `isLandscape` (`width > height`) flags adjust font sizes, paddings, icon sizes, and FAB positioning across all form factors
+- **Unified theme object** — a single `theme` constant with `light` and `dark` keys drives all colors (background, card, text, subtext, border, accent, accentBg), keeping the UI consistent and easy to extend
+- **Accent background tints** — tag chips use a translucent version of the accent color (`#0058bc1a` / `#adc6ff1a`) for a subtle, cohesive look
+- **Dynamic image assets** — all icons and the banner image swap between dark and light variants based on the active theme
+- **Tag chip system** — notes display multi-tag chips on the card list; the editor supports adding and removing tags inline within the banner area
+- **FAB with shadow** — the floating action button uses `elevation`, `shadowColor`, `shadowOffset`, and `shadowRadius` for a native-feeling lift on both iOS and Android
+- **`keyboardDismissMode="on-drag"`** — scrolling the editor automatically dismisses the keyboard for a smoother writing experience
+- **`scrollEnabled={false}` on body input** — delegates scrolling to the parent `ScrollView`, preventing nested scroll conflicts
+- **`numberOfLines` clamping** — note titles are clamped to 2 lines and body previews to 4 lines on the list screen, keeping cards uniform
+- **`textAlignVertical="top"`** — ensures the multiline body input starts text from the top on Android
+
+---
+
+## 🗂 Project Structure
+
+```
+app/
+├── index.tsx          # Entry point — page switcher
+├── Page1.tsx          # Notes list screen
+└── Page2.tsx          # Note editor screen
+
+assets/images/
+├── hamburger-dark.png / hamburger-light.png
+├── search-dark.png / search-light.png
+├── profile-dark.png / profile-light.png
+├── dark-mode.png / light-mode.png
+├── arrow-dark.png / arrow-light.png
+├── edit-dark.png / edit-light.png
+└── banner-dark.png / banner-light.png
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-### Other setup steps
+## 🚀 Getting Started
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+```bash
+# 1. Install base dependencies
+npm install
+```
 
-## Learn more
+```bash
+# 2. Install Expo Status Bar
+npx expo install expo-status-bar
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+# 3. Install React Native Safe Area Context
+npx expo install react-native-safe-area-context
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+# 4. (iOS only) Install native pods
+npx pod-install
+```
 
-## Join the community
+```bash
+# 5. Start Expo dev server
+npx expo start
+```
 
-Join our community of developers creating universal apps.
+> **Why `npx expo install` instead of `npm install`?**
+> `npx expo install` automatically picks the version of each library that is compatible with your current Expo SDK, avoiding version mismatch errors.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Scan the QR code with **Expo Go** on your device, or press `i` / `a` to open in an iOS / Android simulator.
+
+---
+
+## 🛠 Tech Stack
+
+- [React Native](https://reactnative.dev/)
+- [Expo](https://expo.dev/)
+- [expo-status-bar](https://docs.expo.dev/versions/latest/sdk/status-bar/)
+- [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context)
+- TypeScript
