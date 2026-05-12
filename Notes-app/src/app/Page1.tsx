@@ -1,7 +1,9 @@
-import { StyleSheet, Text, View,Image, useColorScheme, Switch, TextInput, Pressable, FlatList,ScrollView } from "react-native";
+import { StyleSheet, Text, View,Image, useColorScheme, Switch, TextInput, Pressable, FlatList,ScrollView,useWindowDimensions } from "react-native";
 import { StatusBar } from 'expo-status-bar';
 import {SafeAreaView } from "react-native-safe-area-context";
 import React, { useState } from "react";
+
+// import * as ScreenOrientation from "expo-screen-orientation"
 
 // #adc6ff #1c1b1b #0058bc #e2e2e2 #c7c7c7
 
@@ -34,7 +36,6 @@ const NOTES = [
 		tags: ["PROJECT", "ROADMAP"],
 		type: "text",
 		date: "Oct 24, 2023",
-		column: 0,  // 0 = left, 1 = right
 	},
 	{
 		id: "2",
@@ -43,7 +44,6 @@ const NOTES = [
 		tags: ["DESIGN", "MOOD"],
 		type: "image",
 		date: "Oct 22, 2023",
-		column: 1,
 	},
 	{
 		id: "3",
@@ -52,7 +52,6 @@ const NOTES = [
 		tags: ["SPRINT", "WORK"],
 		type: "checklist",
 		date: "Oct 20, 2023",
-		column: 0,
 	},
 	{
 		id: "4",
@@ -61,7 +60,6 @@ const NOTES = [
 		tags: ["SYSTEM", "DOCUMENTATION"],
 		type: "text",
 		date: "Oct 18, 2023",
-		column: 1,
 	},
 	{
 		id: "5",
@@ -70,7 +68,6 @@ const NOTES = [
 		tags: ["CAREER", "STUDY"],
 		type: "text",
 		date: "Oct 15, 2023",
-		column: 0,
 	},
 	{
 		id: "6",
@@ -79,7 +76,6 @@ const NOTES = [
 		tags: ["TRAVEL"],
 		type: "image",
 		date: "Oct 12, 2023",
-		column: 1,
 	},
 	{
 		id: "7",
@@ -88,7 +84,6 @@ const NOTES = [
 		tags: ["TODO"],
 		type: "text",
 		date: "Oct 10, 2023",
-		column: 0,
 	},
 	{
 		id: "8",
@@ -97,78 +92,170 @@ const NOTES = [
 		tags: ["DEV", "BACKEND"],
 		type: "text",
 		date: "Oct 8, 2023",
-		column: 1,
 	},
 ];
 
+const Index = () => {
 
-const index = () => {
+    const { height, width } = useWindowDimensions();
+    const colorScheme = useColorScheme();
+    const [manualDark, setManualDark] = useState<boolean | null>(null);
 
-	const colorScheme = useColorScheme();
-	const [manualDark, setManualDark] = useState<boolean | null>(null);
+    const isTablet = width >= 768;
+    const isLandscape = width > height;
 
-	const isDark= manualDark === null ? colorScheme === "dark" : manualDark;
+    const isDark = manualDark === null ? colorScheme === "dark" : manualDark;
+    const inUseTheme = isDark ? theme.dark : theme.light;
 
-	const inUseTheme=isDark ? theme.dark : theme.light;
+    return (
+        <SafeAreaView style={[styles.container, { backgroundColor: inUseTheme.backgroundColor }]}>
+            <StatusBar style={isDark ? "light" : "dark"} />
 
+            <View style={[
+                styles.header,
+                {
+                    borderBottomColor: inUseTheme.card,
+                    paddingLeft: isTablet ? 24 : 16,
+                    paddingRight: isTablet ? 24 : 16,
+                    paddingBottom: isLandscape ? 4 : 8,
+                }
+            ]}>
+                <View style={styles.forFlex}>
+                    <Pressable onPress={() => alert("Menu will be here")}>
+                        <Image
+                            source={isDark ? require("@/assets/images/hamburger-dark.png") : require("@/assets/images/hamburger-light.png")}
+                            style={[
+                                styles.menu,
+                                {
+                                    width: isTablet ? 32 : 26,
+                                    marginRight: isTablet ? 32 : 24,
+                                }
+                            ]}
+                        />
+                    </Pressable>
+                    <Text style={[
+                        styles.title,
+                        {
+                            color: inUseTheme.accent,
+                            fontSize: isTablet ? 38 : isLandscape ? 22 : 30,
+                        }
+                    ]}>
+                        Notes
+                    </Text>
+                </View>
 
-	return (
-		<SafeAreaView style={[styles.container, { backgroundColor: inUseTheme.backgroundColor }]}>
-			<StatusBar style={isDark ? "light" : "dark"} />
-			<View style={[styles.header, { borderBottomColor: inUseTheme.card }]}>
-				<View style={styles.forFlex}>
-					<Pressable onPress={()=> alert("Menu will be here")}>
-						<Image source={
-							isDark ? require("@/assets/images/hamburger-dark.png") :require ("@/assets/images/hamburger-light.png")}
-							style={styles.menu} />
-					</Pressable>
-					<Text style={[styles.title,{ 
-						color: inUseTheme.accent,
-						}]}>
-						Notes
-					</Text>
-				</View>
+                <View style={styles.forFlex}>
+                    <Pressable onPress={() => setManualDark(!isDark)}>
+                        <Image
+                            source={isDark ? require("@/assets/images/dark-mode.png") : require("@/assets/images/light-mode.png")}
+                            style={[
+                                styles.modeToggle,
+                                {
+                                    borderColor: inUseTheme.border,
+                                    width: isTablet ? 72 : 60,
+                                    height: isTablet ? 36 : isLandscape ? 24 : 30,
+                                    borderRadius: isTablet ? 18 : isLandscape ? 12 : 15,
+                                }
+                            ]}
+                        />
+                    </Pressable>
+                    <Pressable onPress={() => alert("Profile will be here")}>
+                        <Image
+                            source={isDark ? require("@/assets/images/profile-dark.png") : require("@/assets/images/profile-light.png")}
+                            style={[
+                                styles.profile,
+                                {
+                                    borderColor: inUseTheme.border,
+                                    width: isTablet ? 50 : isLandscape ? 34 : 40,
+                                    height: isTablet ? 50 : isLandscape ? 34 : 40,
+                                    marginLeft: isTablet ? 20 : 16,
+                                    borderRadius: isTablet ? 25 : isLandscape ? 17 : 20,
+                                }
+                            ]}
+                        />
+                    </Pressable>
+                </View>
+            </View>
 
-				<View style={styles.forFlex}>
-					<Pressable onPress={()=> setManualDark(!isDark)}>
-						<Image source={
-							isDark ? require("@/assets/images/dark-mode.png") :require ("@/assets/images/light-mode.png")}
-							style={[styles.modeToggle,{ borderColor: inUseTheme.border }]} />
-					</Pressable>
-					<Pressable onPress={()=> alert("Profile will be here")}> 
-						<Image source={
-							isDark ? require("@/assets/images/profile-dark.png") :require ("@/assets/images/profile-light.png")}
-							style={[styles.profile, { borderColor: inUseTheme.border }]} />
-					</Pressable>		
-					
-				</View>
+            <View style={[
+                styles.searchContainer,
+                {
+                    backgroundColor: inUseTheme.card,
+                    borderColor: inUseTheme.border,
+                    padding: isTablet ? 14 : 12,
+                    marginTop: isLandscape ? 6 : 10,
+                    marginLeft: isTablet ? 28 : 18,
+                    marginRight: isTablet ? 28 : 18,
+                    marginBottom: isLandscape ? 6 : 10,
+                }
+            ]}>
+                <Image
+                    source={isDark ? require("@/assets/images/search-dark.png") : require("@/assets/images/search-light.png")}
+                    style={[
+                        styles.searchIcon,
+                        {
+                            width: isTablet ? 24 : 20,
+                            height: isTablet ? 24 : 20,
+                        }
+                    ]}
+                />
+                <TextInput
+                    placeholder="Search your notes..."
+                    placeholderTextColor={inUseTheme.subtext}
+                    style={[
+                        styles.searchInput,
+                        {
+                            color: inUseTheme.subtext,
+                            fontSize: isTablet ? 16 : 14,
+                        }
+                    ]}
+                />
+            </View>
 
-			</View>
-			
-				<View style={[styles.searchContainer,{backgroundColor: inUseTheme.card,borderColor: inUseTheme.border}]}>	
-					<Image source={
-						isDark ? require("@/assets/images/search-dark.png") :require ("@/assets/images/search-light.png")}
-						style={styles.searchIcon} />
-					<TextInput placeholder="Search your notes..." placeholderTextColor={inUseTheme.subtext} style={[
-						styles.searchInput,{ color: inUseTheme.subtext}
-					]}/>
-				</View>
-		
-			<FlatList 
+            <FlatList
                 data={NOTES}
                 keyExtractor={(item) => item.id}
                 numColumns={2}
-                contentContainerStyle={styles.flatListContent}
-                columnWrapperStyle={styles.columnWrapper}
+                contentContainerStyle={[
+                    styles.flatListContent,
+                    {
+                        paddingHorizontal: isTablet ? 20 : 14,
+                        paddingBottom: isLandscape ? 60 : 100,
+                    }
+                ]}
+                columnWrapperStyle={[
+                    styles.columnWrapper,
+                    { gap: isTablet ? 16 : 12 }
+                ]}
                 renderItem={({ item }) => (
-                    <Pressable style={StyleSheet.flatten([styles.noteCard, { backgroundColor: inUseTheme.card, borderColor: inUseTheme.border }])}>
-                        <Text numberOfLines={2} style={[styles.noteText, { color: inUseTheme.text }]}>
+                    <Pressable style={[
+                        styles.noteCard,
+                        {
+                            backgroundColor: inUseTheme.card,
+                            borderColor: inUseTheme.border,
+                            padding: isTablet ? 8 : 4,
+                            marginVertical: isLandscape ? 5.5 : 6.5,
+                        }
+                    ]}>
+                        <Text numberOfLines={2} style={[
+                            styles.noteText,
+                            {
+                                color: inUseTheme.text,
+                                fontSize: isTablet ? 22 : isLandscape ? 17 : 20,
+                            }
+                        ]}>
                             {item.title}
                         </Text>
-                        <Text numberOfLines={4} style={[styles.noteSubText, { color: inUseTheme.subtext }]}>
+                        <Text numberOfLines={4} style={[
+                            styles.noteSubText,
+                            {
+                                color: inUseTheme.subtext,
+                                fontSize: isTablet ? 15 : isLandscape ? 12 : 14,
+                            }
+                        ]}>
                             {item.body}
-                        </Text>  
-                        
+                        </Text>
+
                         <View style={styles.noteTag}>
                             {item.tags.map((tag) => (
                                 <Text key={tag} style={[styles.tag, { color: inUseTheme.accent, backgroundColor: inUseTheme.accentBg }]}>
@@ -176,7 +263,7 @@ const index = () => {
                                 </Text>
                             ))}
                         </View>
-                        
+
                         <Text style={[styles.date, { color: inUseTheme.subtext }]}>
                             ~ {item.date}
                         </Text>
@@ -184,133 +271,128 @@ const index = () => {
                 )}
                 showsVerticalScrollIndicator={false}
             />
-			<Pressable
-				style={[styles.fab, { backgroundColor: inUseTheme.accent }]}
-					onPress={() => alert("New note navition will be added here")}
-				>
-					<Text style={[styles.fabIcon,{color: inUseTheme.backgroundColor}]}>+</Text>
-			</Pressable>
-		</SafeAreaView>
-	);
+
+            <Pressable
+                style={[
+                    styles.fab,
+                    {
+                        backgroundColor: inUseTheme.accent,
+                        bottom: isLandscape ? 24 : 48,
+                        right: isTablet ? 40 : 30,
+                        width: isTablet ? 64 : 56,
+                        height: isTablet ? 64 : 56,
+                        borderRadius: isTablet ? 32 : 28,
+                    }
+                ]}
+                onPress={() => alert("New note navigation will be added here")}
+            >
+                <Text style={[
+                    styles.fabIcon,
+                    {
+                        color: inUseTheme.backgroundColor,
+                        fontSize: isTablet ? 46 : 40,
+                        lineHeight: isLandscape ? 28 : 32,
+                    }
+                ]}>+</Text>
+            </Pressable>
+        </SafeAreaView>
+    );
 };
 
-export default index;
+export default Index;
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-	},
-	header: {
-		display: "flex",
-		flexDirection: "row",
-		alignItems: "center",
-		justifyContent: "space-between",
-		paddingLeft: 16,
-		paddingRight: 16,
-		paddingBottom: 8,
-		borderBottomWidth: 2,
-	},
-	forFlex:{
-		display: "flex",
-		flexDirection: "row",
-		alignItems: "center",
-	},
-	menu:{
-		width:26,
-		height: 50, 
-		marginLeft: 6, 
-		marginRight: 24
-	},
-	title:{
-		fontSize: 30,
-		fontWeight: "bold",
-	},
-	modeToggle:{
-		width:60,
-		height: 30, 
-		marginLeft: 6,
-		marginRight: 4,
-		borderWidth: 1, 
-		borderRadius: 15
-	},
-	profile:{
-		width:40,
-		height: 40, 
-		marginLeft: 16, 
-		borderRadius: 20
-	},
-	searchContainer:{
-		display: "flex",
-		flexDirection: "row",
-		alignItems: "center",
-		padding: 12,
-		marginTop: 10,
-		marginLeft: 18,
-		marginRight: 18,
-		borderRadius: 30,
-		borderWidth: 1,
-		marginBottom: 10
-	},
-	searchIcon:{
-		width: 20,
-		height: 20,
-		marginRight: 12,
-	},
-	searchInput:{
-		flex: 1,
-		padding:0,
-		margin:0,
-	},
-	noteCard:{
-		flex:1,
-		padding: 4,
-		justifyContent: "space-between",
-		marginVertical: 6.5,
-		borderWidth: 1,
-		borderRadius: 7,
-	},
-	flatListContent: {
-        paddingHorizontal: 14,
+    container: {
+        flex: 1,
+    },
+    header: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        borderBottomWidth: 2,
+    },
+    forFlex: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+    },
+    menu: {
+        marginLeft: 6,
+		height: 50,
+    },
+    title: {
+        fontWeight: "bold",
+    },
+    modeToggle: {
+        marginLeft: 6,
+        marginRight: 4,
+        borderWidth: 1,
+    },
+    profile: {
+        borderWidth: 1,
+    },
+    searchContainer: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        borderRadius: 30,
+        borderWidth: 1,
+    },
+    searchIcon: {
+        marginRight: 12,
+    },
+    searchInput: {
+        flex: 1,
+        padding: 0,
+        margin: 0,
+    },
+    noteCard: {
+        flex: 1,
+        justifyContent: "space-between",
+        borderWidth: 1,
+        borderRadius: 7,
+    },
+    flatListContent: {
         paddingTop: 4,
-        paddingBottom: 100,
     },
     columnWrapper: {
         justifyContent: "space-between",
-        gap: 12,
     },
-	noteText:{
-		fontSize: 20,
-		fontWeight: "bold",
-		padding: 4
-	},
-	noteSubText:{
-		fontSize: 14,
-		padding: 4,
-		marginBottom: 5
-	},
-	fab: {
-		position: "absolute", bottom: 48, right: 30,
-		width: 56, height: 56, borderRadius: 28,
-		alignItems: "center", justifyContent: "center",
-		elevation: 6,
-		shadowColor: "#000",
-		padding: 4,
-		shadowOffset: { width: 0, height: 3 },
-		shadowOpacity: 0.25, shadowRadius: 5,
-	},
-	fabIcon: { 
-		fontSize: 40, lineHeight: 32
-	},
-	noteTag:{
-		display: "flex",
-		flexDirection: "column"
-	},
-	tag:{
-		fontSize:12,alignSelf: "flex-start",padding:2,paddingHorizontal:5,margin:3
-	},
-	date:{
-		fontSize:12,
-		margin:4,
-		alignSelf: "flex-end"
-	}
+    noteText: {
+        fontWeight: "bold",
+        padding: 4,
+    },
+    noteSubText: {
+        padding: 4,
+        marginBottom: 5,
+    },
+    fab: {
+        position: "absolute",
+        alignItems: "center",
+        justifyContent: "center",
+        elevation: 6,
+        shadowColor: "#000",
+        padding: 4,
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.25,
+        shadowRadius: 5,
+    },
+    fabIcon: {},
+    noteTag: {
+        display: "flex",
+        flexDirection: "column",
+    },
+    tag: {
+        fontSize: 12,
+        alignSelf: "flex-start",
+        padding: 2,
+        paddingHorizontal: 5,
+        margin: 3,
+    },
+    date: {
+        fontSize: 12,
+        margin: 4,
+        alignSelf: "flex-end",
+    },
 });
