@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, useColorScheme, ImageBackground, Pressable, Image, useWindowDimensions, TextInput, ScrollView, KeyboardAvoidingView, Platform } from 'react-native'
+import { StyleSheet, Text, View, useColorScheme, ImageBackground, Pressable, Image, useWindowDimensions, TextInput, ScrollView, KeyboardAvoidingView, Platform, FlatList } from 'react-native'
 import React, { useState } from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -25,6 +25,14 @@ const theme = {
 }
 
 const tags = ["NEW", "TODO"]
+
+const TOOLS = [
+    { id: '1', title: 'Bold', icon: 'format-bold' },
+    { id: '2', title: 'Italic', icon: 'format-italic' },
+    { id: '3', title: 'Insert', icon: 'grid-plus' },
+    { id: '4', title: 'Private', icon: 'lock-outline' },
+    { id: '5', title: 'Activity', icon: 'source-branch' },
+];
 
 const index_2 = () => {
     const [manualDark, setManualDark] = useState<boolean | null>(null);
@@ -89,14 +97,14 @@ const index_2 = () => {
                             {tags.map((tag) => (
                                 <Pressable key={tag} onPress={() => alert("Remove tag")}>
                                     <Text style={[styles.tag, { color: inUseTheme.accent, backgroundColor: inUseTheme.accentBg }]}>
-                                        {tag} <Text style={{ color: inUseTheme.subtext }}>x</Text>
+                                        {tag} <Text style={{ color: inUseTheme.subtext }}>{"   "}x</Text>
                                     </Text>
                                 </Pressable>
                             ))}
                             <Pressable onPress={() => alert("Add tag")}>
                                 <Text style={[StyleSheet.compose(styles.tag,styles.date)
                                 ,{color:inUseTheme.accent,backgroundColor: inUseTheme.accentBg}]}>
-                                    +
+                                    {" "}+{" "}
                                 </Text>
                             </Pressable>
                         </View>
@@ -133,6 +141,39 @@ const index_2 = () => {
                         }]}
                     />
                 </ScrollView>
+                
+                {/* <FlatList 
+                        data={TOOLS}
+                        keyExtractor={item => item.id}
+                        renderItem={({ item }) => (
+                            <Pressable onPress={()=>alert(`${item.title} will be added here`)}>
+                                <Image source={isDark ? require("@/assets/images/dark-mode.png") : require("@/assets/images/light-mode.png")}/>
+                                <Text>
+                                    item.title
+                                </Text>
+                            </Pressable>
+                        )}
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                        contentContainerStyle={styles.listContent}
+                /> */}
+                <Pressable style={[styles.fab,{
+                        backgroundColor: inUseTheme.accent,
+                        bottom: isLandscape ? 24 : 48,
+                        right: isTablet ? 40 : 30,
+                        width: isTablet ? 64 : 56,
+                        height: isTablet ? 64 : 56,
+                        borderRadius: isTablet ? 32 : 28,
+                    }]} onPress={()=>alert("edit too box will be added here")}>
+                    <Image  style={{
+                        padding:6,
+                        width: isTablet ? 56 : 44,
+                        height: isTablet ? 56 : 44,
+                    }}
+                    source={isDark ? require("@/assets/images/edit-light.png") : require("@/assets/images/edit-dark.png")}
+                    />                    
+                </Pressable>
+
             </KeyboardAvoidingView>
         </View>
     )
@@ -204,7 +245,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden'
     },
     addIcon: {
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: 'bold',
         textAlign: 'center'
     },
@@ -216,5 +257,16 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         fontSize: 12,
         fontWeight: '600'
-    }
+    },
+    fab: {
+        position: "absolute",
+        alignItems: "center",
+        justifyContent: "center",
+        elevation: 6,
+        shadowColor: "#000",
+        padding: 4,
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.25,
+        shadowRadius: 5,
+    },
 });
