@@ -166,7 +166,6 @@ const index_2 = () => {
                         borderRadius: isTablet ? 32 : 28,
                     }]} onPress={()=>alert("edit too box will be added here")}>
                     <Image  style={{
-                        padding:6,
                         width: isTablet ? 56 : 44,
                         height: isTablet ? 56 : 44,
                     }}
