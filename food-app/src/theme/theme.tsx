@@ -33,7 +33,7 @@ const useTheme = () => {
 
 
     return{
-        isDark,inUseTheme,manualDark
+        isDark,inUseTheme,manualDark,setManualDark
     }
 
 }

@@ -13,7 +13,7 @@ const Drawer = createDrawerNavigator();
 
 function CustomDrawerContent(props : any) {
 
-    const { inUseTheme } = useTheme();
+    const { isDark,inUseTheme, setManualDark } = useTheme();
     const insets = useSafeAreaInsets();
     const { height, width } = useWindowDimensions();
 
@@ -89,7 +89,14 @@ function CustomDrawerContent(props : any) {
                     activeTintColor={inUseTheme.accent}
                     onPress={() => props.navigation.navigate('MainTab', { screen: 'Orders' })}
                 />
-
+                <DrawerItem
+                    label= {isDark ? "Toggle To Light" : "Toggle To Dark"}  
+                    labelStyle={{ 
+                        color: inUseTheme.subtext, 
+                        fontSize: 14,
+                    }}
+                    onPress={() => setManualDark(!isDark)}
+                />
             </DrawerContentScrollView>
 
             <View style={[styles.footerSection, StyleHelper.footerSection]}>
@@ -126,6 +133,7 @@ function MyDrawer() {
                 name="MainTab" 
                 component={MainTabs} 
                 options={{
+                    title: "Home",
                     headerShown:false
                 }}
             />
