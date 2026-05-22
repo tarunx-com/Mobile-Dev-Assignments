@@ -135,7 +135,6 @@ const HomeScreen = () => {
 
 export default HomeScreen;
 
-// Static Styles
 const styles = StyleSheet.create({
     separator: {
         height: 4,

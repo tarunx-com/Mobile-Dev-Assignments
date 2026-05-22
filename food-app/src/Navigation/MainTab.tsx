@@ -29,7 +29,6 @@ const CustomHeader= ({navigation} :any) => {
             paddingHorizontal: isTablet || isLandscape ? 20 : 5, 
         }]}>
             
-            {/* Hamburger Menu Button */}
             <View style={{flexDirection:'row', justifyContent: 'flex-start',alignItems:'center',flex:1}}>
                 <Pressable 
                     onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
@@ -81,7 +80,6 @@ const CustomHeader= ({navigation} :any) => {
 };
 
 
-// --- 2. Home Stack Navigator ---
 function HomeStack(){
 
     const {inUseTheme} =useTheme();
@@ -114,7 +112,6 @@ function HomeStack(){
 };
 
 
-// --- 3. Main Bottom Tabs Navigator ---
 function MainTabs(){
     const {isDark, inUseTheme} = useTheme();
 

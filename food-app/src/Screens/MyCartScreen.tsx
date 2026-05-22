@@ -151,7 +151,6 @@ const MyCartScreen = () => {
         </View>
     );
 
-    // ── Footer (address + summary + checkout) ─────────────────────
     const ListFooter = () => {
         if (cartEntries.length === 0) return null;
 
@@ -183,7 +182,6 @@ const MyCartScreen = () => {
                     </View>
                 </View>
 
-                {/* Price Summary */}
                 <View style={[styles.summaryCard, {
                     backgroundColor: isDark ? '#1C1C1E' : inUseTheme.card,
                     borderColor: isDark ? '#2C2C2E' : inUseTheme.border,
@@ -220,7 +218,6 @@ const MyCartScreen = () => {
                     </View>
                 </View>
 
-                {/* Checkout Button */}
                 <Pressable
                     style={({ pressed }) => [
                         styles.checkoutBtn,
@@ -293,7 +290,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 
-    // Header
     listHeader: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -321,7 +317,6 @@ const styles = StyleSheet.create({
         letterSpacing: 1,
     },
 
-    // Cart card
     cartCard: {
         borderRadius: 16,
         borderWidth: 1,
@@ -342,7 +337,6 @@ const styles = StyleSheet.create({
         lineHeight: 17,
     },
 
-    // Qty row
     qtyRow: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -368,7 +362,6 @@ const styles = StyleSheet.create({
         padding: 8,
     },
 
-    // Address card
     addressCard: {
         borderRadius: 16,
         borderWidth: 1,
@@ -396,7 +389,6 @@ const styles = StyleSheet.create({
         letterSpacing: 0.5,
     },
 
-    // Summary card
     summaryCard: {
         borderRadius: 16,
         borderWidth: 1,
@@ -421,7 +413,6 @@ const styles = StyleSheet.create({
         color: '#E8834A',
     },
 
-    // Checkout button
     checkoutBtn: {
         flexDirection: 'row',
         justifyContent: 'center',
@@ -432,7 +423,6 @@ const styles = StyleSheet.create({
         color: '#fff',
     },
 
-    // Empty state
     emptyContainer: {
         alignItems: 'center',
         justifyContent: 'center',

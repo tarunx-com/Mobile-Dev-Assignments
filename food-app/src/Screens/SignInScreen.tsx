@@ -148,7 +148,6 @@ const LogInScreen = () => {
                     </View>
                 </View>
 
-                {/* ── Password field ── */}
                 <View style={[styles.fieldGroup, styleHelper.fieldGroup]}>
                     <Text style={[styles.fieldLabel, styleHelper.fieldLabel]}>
                         Password
@@ -188,7 +187,6 @@ const LogInScreen = () => {
                     </Text>
                 </Pressable>
 
-                {/* ── Primary CTA ── */}
                 <Pressable onPress={()=>login({name: email.split('@')[0],Email: email })} 
                 style={[styles.primaryButton, styleHelper.primaryButton]}>
                     <Text style={[styles.primaryButtonText, styleHelper.primaryButtonText]}>
@@ -197,7 +195,6 @@ const LogInScreen = () => {
                 </Pressable>
 
 
-                {/* ── Sign Up nudge ── */}
                 <Pressable
                     onPress={() => navigation.navigate('Log In')}
                     style={[styles.signUpRow, styleHelper.signUpRow]}
@@ -210,7 +207,6 @@ const LogInScreen = () => {
                     </Text>
                 </Pressable>
 
-                {/* ── OR divider ── */}
                 <View style={[styles.dividerContainer, styleHelper.dividerContainer]}>
                     <View style={[styles.dividerLine, styleHelper.dividerLine]} />
                     <Text style={[styles.dividerText, styleHelper.dividerText]}>
@@ -219,7 +215,6 @@ const LogInScreen = () => {
                     <View style={[styles.dividerLine, styleHelper.dividerLine]} />
                 </View>
 
-                {/* ── Google social button ── */}
                 <View style={styles.socialButtonWrapper}>
                     <Pressable onPress={()=>alert('Google Sign-In coming soon!')}
                     style={[styles.socialButton, styleHelper.socialButton]}>

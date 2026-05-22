@@ -91,7 +91,6 @@ const DetailsScreen = ({ route }: any) => {
         const quantity = cartItems[item.id] || 0;
 
         return (
-            // Outer wrapper handles flex-based grid layout evenly
             <View style={[styles.gridItemWrapper, { marginHorizontal: numColumns > 1 ? 8 : 16 }]}>
                 <View style={[styles.cardContainer, StyleHelper.card]}>
                     <Image 
@@ -113,7 +112,6 @@ const DetailsScreen = ({ route }: any) => {
                             {item.description}
                         </Text>
                         
-                        {/* Pushes action row to the bottom to align cards in a grid */}
                         <View style={styles.spacer} />
 
                         <View style={styles.actionRow}>
@@ -153,7 +151,6 @@ const DetailsScreen = ({ route }: any) => {
 
     return (
         <FlatList
-            // Changing key forces FlatList to re-render properly when numColumns changes on rotation
             key={`list-${numColumns}`}
             data={itemRest.items}
             keyExtractor={(item) => item.id}
@@ -163,7 +160,6 @@ const DetailsScreen = ({ route }: any) => {
             contentContainerStyle={[
                 styles.listPadding, 
                 StyleHelper.screenContainer,
-                // Add horizontal padding to the overall list when in grid mode
                 { paddingHorizontal: numColumns > 1 ? 8 : 0 } 
             ]}
             showsVerticalScrollIndicator={false}
@@ -173,7 +169,6 @@ const DetailsScreen = ({ route }: any) => {
 
 export default DetailsScreen;
 
-// Static Styles for Layout and Positioning
 const styles = StyleSheet.create({
     headerContainer: {
         marginBottom: 24,
@@ -301,7 +296,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginTop: 'auto', // Pushes to bottom in flex container
+        marginTop: 'auto',
     },
     quantityContainer: {
         flexDirection: 'row',
