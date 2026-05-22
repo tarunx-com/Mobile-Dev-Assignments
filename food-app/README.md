@@ -177,7 +177,7 @@ RootNavigation (NavigationContainer)
 
 ---
 
-## 🔗 Deep Linking Setup [x]
+## 🔗 Deep Linking Setup - [x]
 
 ---
 
