@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View,Text, Pressable, useWindowDimensions,Image} from 'react-native';
-import { NavigationContainer, LinkingOptions,NavigatorScreenParams} from '@react-navigation/native';
+import { NavigationContainer, LinkingOptions,NavigatorScreenParams,} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import OnBoardingScreen from '../Screens/OnBoardingScreen';
 import MyDrawer from '../Navigation/DrawerNav';
@@ -8,6 +8,7 @@ import useTheme from '../theme/theme';
 import AuthNav from './AuthNav';
 import  AuthHelper, {useAuth} from '../data/AuthHelper'
 import { CartProvider } from '../data/CartData';
+import { ThemeProvider } from '../theme/theme';
 import * as Linking from 'expo-linking';
 
 
@@ -150,12 +151,15 @@ function RootStack(){
 
 export default function RootNavigation() {
     return (
-        <CartProvider>
-        <AuthHelper>
-            <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
-            <RootStack />
-            </NavigationContainer>
-        </AuthHelper>
-        </CartProvider>
+        <ThemeProvider>
+            <CartProvider>
+            <AuthHelper>
+                <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
+                <RootStack />
+                </NavigationContainer>
+            </AuthHelper>
+            </CartProvider>            
+        </ThemeProvider>
+
     );
 }
