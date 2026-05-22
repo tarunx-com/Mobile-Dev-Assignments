@@ -265,9 +265,9 @@ src/
 
 ---
 
-## 📊 Navigation Diagram (TLDraw)
+## 📊 Navigation Diagram 
 
-> 🔗 [View Navigation Diagram on TLDraw](https://www.tldraw.com) ←
+![Alt text](./assets/nav-diagram.png)
 
 ---
 
