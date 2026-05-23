@@ -10,6 +10,12 @@ A full-featured React Native food delivery app built with **Expo** and **React N
 
 ---
 
+## 📹 Demo (edited after dead line)
+
+> 🔗 [Demo Video Link](https://drive.google.com/file/d/1l34eqSv4BiAJp-rfe3tpFwAHUJDRA9PM/view?usp=sharing) 
+
+---
+
 ## 🔗 Repository
 
 > 🔗 [GitHub Repository Link](https://github.com/tarunx-com/Mobile-Dev-Assignments/tree/main/food-app) 
