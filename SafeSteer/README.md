@@ -8,7 +8,7 @@ The goal is to encourage safer driving habits by providing a live safety score, 
 
 ## 📹 Demo
 
-> 🔗 [Demo Video Link]() 
+> 🔗 [Demo Video Link](https://drive.google.com/file/d/1K8qWhY9F1WFSgCzXvJcFfgyOCvTQbYXZ/view?usp=sharing) 
 
 ---
 
