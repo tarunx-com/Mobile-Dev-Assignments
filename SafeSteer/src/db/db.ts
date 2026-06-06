@@ -41,6 +41,6 @@ export const getOne = () =>
 	db.getAllAsync<History>("SELECT * FROM history ORDER BY id DESC LIMIT 1");
 
 export const remove = (id: number) =>
-	db.runAsync("DELETE FROM snippets WHERE id = ?", [id]);
+	db.runAsync("DELETE FROM history WHERE id = ?", [id]);
 
 export default db;
