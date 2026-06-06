@@ -478,15 +478,18 @@ Add screenshots here:
 
 ### Home Screen
 
-![Home](screenshots/home.png)
+![Dark](assets/images/home-dark.jpeg)
+![Light](assets/images/home-light.jpeg)
 
 ### Drive Screen
 
-![Drive](screenshots/drive.png)
+![Dark](assets/images/drive-dark.jpeg)
+![Light](assets/images/drive-light.jpeg)
 
 ### History Screen
 
-![History](screenshots/history.png)
+![Dark](assets/images/history-dark.jpeg)
+![Light](assets/images/history-light.jpeg)
 
 ---
 
