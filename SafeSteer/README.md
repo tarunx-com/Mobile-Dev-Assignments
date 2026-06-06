@@ -18,8 +18,6 @@ The goal is to encourage safer driving habits by providing a live safety score, 
 
 ---
 
----
-
 ## Installation
 
 ### Clone the Repository
