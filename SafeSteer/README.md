@@ -6,8 +6,6 @@ The goal is to encourage safer driving habits by providing a live safety score, 
 
 ---
 
-# SafeSteer 🚗
-
 ## 📹 Demo
 
 > 🔗 [Demo Video Link]() 
