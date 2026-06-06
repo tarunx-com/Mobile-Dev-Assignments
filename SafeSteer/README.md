@@ -502,6 +502,6 @@ Add screenshots here:
 
 ---
 
-## Author
+## Tarun
 
 Built using React Native, Expo, SQLite, and DeviceMotion sensors as a lightweight driver safety monitoring application.
